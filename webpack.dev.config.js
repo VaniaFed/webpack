@@ -1,5 +1,15 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const devMode = process.env.NODE_ENV !== 'production';
+
+const js = require('./webpack/js');
+const css = require('./webpack/css');
+const sass = require('./webpack/sass');
+const sassModule = require('./webpack/sass-module');
+const html = require('./webpack/html');
+const files = require('./webpack/files');
 
 module.exports = {
     entry: './src/index.jsx',
@@ -10,93 +20,16 @@ module.exports = {
     },
     mode: 'development',
     module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                use: ['babel-loader']
-            },
-            {
-                test: /\.html$/,
-                use: ['html-loader']
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: false
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: [require('autoprefixer')()]
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.sass$/,
-                exclude: /\.module\.sass$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: false
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: [require('autoprefixer')()]
-                        }
-                    },
-                    'sass-loader'
-                ]
-            },
-            {
-                test: /\.module.sass$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        query: {
-                            localIdentName: '[hash:8]',
-                            modules: true
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            ident: 'postcss',
-                            plugins: [require('autoprefixer')()]
-                        }
-                    },
-                    'sass-loader'
-                ]
-            },
-            {
-                test: /\.png|jpg|jpeg|svg|gif$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 10000
-                        }
-                    }
-                ]
-            }
-        ]
+        rules: [js, css, sass, sassModule, html, files]
     },
     plugins: [
         new HtmlWebPackPlugin({
             template: './src/index.html',
             filename: './index.html'
+        }),
+        new MiniCssExtractPlugin({
+            filename: devMode ? '[name].css' : '[name].[hash].css',
+            chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
         })
     ],
     devtool: 'source-map',
