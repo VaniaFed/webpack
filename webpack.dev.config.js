@@ -78,7 +78,9 @@ module.exports = {
                         }
                     },
                     'sass-loader'
-                ],
+                ]
+            },
+            {
                 test: /\.png|jpg|jpeg|svg|gif$/,
                 use: [
                     {
@@ -105,6 +107,6 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['.webpack.js', '.js', '.jsx']
+        extensions: ['.webpack.js', '.js', '.jsx', '.json']
     }
 };
