@@ -2,10 +2,10 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.jsx",
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: '/',
+    publicPath: "/",
     filename: "bundle.js"
   },
   mode: "development",
@@ -56,7 +56,7 @@ module.exports = {
               plugins: [require("autoprefixer")()]
             }
           },
-          "sass-loader",
+          "sass-loader"
         ]
       },
       {
@@ -102,7 +102,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     port: 9000,
-    publicPath: '/',
+    publicPath: "/"
   },
   resolve: {
     extensions: [".webpack.js", ".js", ".jsx"]
