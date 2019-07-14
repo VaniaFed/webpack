@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const babel = require('./webpack/babel');
 const css = require('./webpack/css');
@@ -23,17 +25,24 @@ module.exports = {
     plugins: [
         new HtmlWebPackPlugin({
             template: './src/index.html',
-            filename: './index.html'
+            filename: './index.html',
+            minify: {
+                collapseWhitespace: true
+            }
         }),
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
             filename: '[name].css',
             chunkFilename: '[id].css'
         })
     ],
+    optimization: {
+        minimizer: [new UglifyJsPlugin(), new OptimizeCSSAssetsPlugin()]
+    },
     stats: 'errors-only',
     resolve: {
-        extensions: ['.webpack.js', '.js', '.jsx', '.json']
+        extensions: ['.webpack.js', '.js', '.jsx', '.json'],
+        alias: {
+            Components: path.resolve(__dirname, 'src/components/')
+        }
     }
 };

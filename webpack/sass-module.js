@@ -13,7 +13,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
                 localIdentName: '[hash:8]',
-                modules: true
+                modules: true,
             }
         },
         {

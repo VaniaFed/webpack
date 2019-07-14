@@ -32,7 +32,7 @@ module.exports = {
         }),
         new StyleLintPlugin({
             configPath: './.stylelintrc'
-        }),
+        })
     ],
     devtool: 'source-map',
     stats: 'errors-only',
