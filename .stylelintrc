@@ -1,0 +1,8 @@
+{
+    "plugins": [
+        "stylelint-scss"
+    ],
+    "defaultSeverity": "warning",
+    "extends": "stylelint-config-recommended",
+    "syntax": "sass"
+}

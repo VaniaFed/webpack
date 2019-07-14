@@ -31,7 +31,7 @@ module.exports = {
         'implicit-arrow-linebreak': 1,
         'no-use-before-define': 0,
         'linebreak-style': 0,
-        // 'prettier/prettier': 2,
+        'prettier/prettier': 2,
         quotes: [2, 'single'],
         'prettier/prettier': [2, { singleQuote: true }],
         indent: ['error', 4, { SwitchCase: 1 }],
