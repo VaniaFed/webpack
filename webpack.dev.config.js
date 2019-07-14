@@ -42,6 +42,9 @@ module.exports = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['.webpack.js', '.js', '.jsx', '.json']
+        extensions: ['.webpack.js', '.js', '.jsx', '.json'],
+        alias: {
+            Components: path.resolve(__dirname, 'src/components/')
+        }
     }
 };
