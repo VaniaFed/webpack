@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const babel = require('./webpack/babel');
 const css = require('./webpack/css');
@@ -35,7 +36,7 @@ module.exports = {
         })
     ],
     optimization: {
-        minimizer: [new OptimizeCSSAssetsPlugin()],
+        minimizer: [new OptimizeCSSAssetsPlugin(), new TerserPlugin({})],
         splitChunks: {
             chunks: 'async',
             minSize: 30000,
