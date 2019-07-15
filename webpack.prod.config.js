@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const babel = require('./webpack/babel');
@@ -36,7 +35,7 @@ module.exports = {
         })
     ],
     optimization: {
-        minimizer: [new UglifyJsPlugin(), new OptimizeCSSAssetsPlugin()]
+        minimizer: [new OptimizeCSSAssetsPlugin()]
     },
     stats: 'errors-only',
     resolve: {
