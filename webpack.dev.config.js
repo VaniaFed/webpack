@@ -31,7 +31,8 @@ module.exports = {
             chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
         }),
         new StyleLintPlugin({
-            configPath: './.stylelintrc'
+            configFile: './.stylelintrc',
+            syntax: 'sass'
         })
     ],
     devtool: 'source-map',
