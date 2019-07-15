@@ -1,29 +1,8 @@
-const path = require('path');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const merge = require('webpack-merge');
-const commonConfig = require('./webpack.common');
-const js = require('./webpack/js');
 
-const devConfig = merge([
-    {
-        mode: 'development',
-        plugins: [
-            new StyleLintPlugin({
-                configFile: './.stylelintrc',
-                syntax: 'sass'
-            })
-        ],
-        module: {
-            rules: [js]
-        },
-        devtool: 'source-map',
-        devServer: {
-            contentBase: path.join(__dirname, 'dist'),
-            port: 9000,
-            publicPath: '/',
-            stats: 'errors-only'
-        }
-    }
-]);
+const baseConfig = require('./webpack/webpack-config');
+const devConfig = require('./webpack/webpack-dev-config');
+const devserverConfig = require('./webpack/webpack-devserver-config');
+const aliasConfig = require('./webpack/webpack-alias');
 
-module.exports = merge(commonConfig, devConfig);
+module.exports = merge([baseConfig, devConfig, devserverConfig, aliasConfig]);
